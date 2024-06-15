@@ -199,6 +199,7 @@ The output of the Simulation is as follows:
 ![image](https://github.com/AsahiroKenpachi/asap_7nm_Xschem/assets/137492506/2937f3c8-1730-48cf-b95c-818581002aa9)
 
 #### INVERTER TRANSIENT RESPONSE TO INPUT SIGNAL
+A FinFET inverter is a fundamental logic gate that utilizes FinFET (Fin Field-Effect Transistor) technology. FinFETs are advanced transistors used in modern CMOS technology due to their superior control over the channel and reduced leakage currents compared to traditional planar MOSFETs. Instead of conventional CMOS ,we use nFinfet and pFinfet to construct the inveter.
 The Generated Spice File from xschem is as follows
 
 
