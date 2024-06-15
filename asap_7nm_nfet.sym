@@ -1,0 +1,119 @@
+v {xschem version=3.4.5 file_version=1.2
+* Copyright 2021 Stefan Frederik Schippers
+* 
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     https://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+
+}
+G {}
+K {type=nfinfet
+format="@spiceprefix@name @pinlist @model l=@l nfin=@nfin"
+template="name=nfet1 model=asap_7nm_nfet spiceprefix=X l=7e-009 nfin=14"
+device_model="tcleval(
+.subckt asap_7nm_nfet S G D B l=@l nfin=@nfin 
+	nnmos_finfet S G D B BSIMCMG_osdi_N l=@l nfin=@nfin
+.ends asap_7nm_nfet
+
+.model BSIMCMG_osdi_N BSIMCMG_va (
++ TYPE = 1 
+************************************************************
+*                         general                          *
+************************************************************
++version = 107             bulkmod = 1               igcmod  = 1               igbmod  = 0             
++gidlmod = 1               iimod   = 0               geomod  = 1               rdsmod  = 0             
++rgatemod= 0               rgeomod = 0               shmod   = 0               nqsmod  = 0             
++coremod = 0               cgeomod = 0               capmod  = 0               tnom    = 25            
++eot     = 1e-009          eotbox  = 1.4e-007        eotacc  = 1e-010          tfin    = 6.5e-009      
++toxp    = 2.1e-009        nbody   = 1e+022          phig    = 4.2466          epsrox  = 3.9           
++epsrsub = 11.9            easub   = 4.05            ni0sub  = 1.1e+016        bg0sub  = 1.17          
++nc0sub  = 2.86e+025       nsd     = 2e+026          ngate   = 0               nseg    = 5             
++l       = 2.1e-008        xl      = 1e-009          lint    = -2e-009         dlc     = 0             
++dlbin   = 0               hfin    = 3.2e-008        deltaw  = 0               deltawcv= 0             
++sdterm  = 0               epsrsp  = 3.9             nfin    = 1
++toxg    = 1.80e-009
+************************************************************
+*                            dc                            *
+************************************************************
++cit     = 0               cdsc    = 0.01            cdscd   = 0.01            dvt0    = 0.05          
++dvt1    = 0.47            phin    = 0.05            eta0    = 0.07            dsub    = 0.35          
++k1rsce  = 0               lpe0    = 0               dvtshift= 0               qmfactor= 2.5           
++etaqm   = 0.54            qm0     = 0.001           pqm     = 0.66            u0      = 0.0303        
++etamob  = 2               up      = 0               ua      = 0.55            eu      = 1.2           
++ud      = 0               ucs     = 1               rdswmin = 0               rdsw    = 200           
++wr      = 1               rswmin  = 0               rdwmin  = 0               rshs    = 0             
++rshd    = 0               vsat    = 70000           deltavsat= 0.2             ksativ  = 2             
++mexp    = 4               ptwg    = 30              pclm    = 0.05            pclmg   = 0             
++pdibl1  = 0               pdibl2  = 0.002           drout   = 1               pvag    = 0             
++fpitch  = 2.7e-008        rth0    = 0.225           cth0    = 1.243e-006      wth0    = 2.6e-007      
++lcdscd  = 5e-005          lcdscdr = 5e-005          lrdsw   = 0.2             lvsat   = 0             
+************************************************************
+*                         leakage                          *
+************************************************************
++aigc    = 0.014           bigc    = 0.005           cigc    = 0.25            dlcigs  = 1e-009        
++dlcigd  = 1e-009          aigs    = 0.0115          aigd    = 0.0115          bigs    = 0.00332       
++bigd    = 0.00332         cigs    = 0.35            cigd    = 0.35            poxedge = 1.1           
++agidl   = 1e-012          agisl   = 1e-012          bgidl   = 10000000        bgisl   = 10000000      
++egidl   = 0.35            egisl   = 0.35           
+************************************************************
+*                            rf                            *
+************************************************************
+************************************************************
+*                         junction                         *
+************************************************************
+************************************************************
+*                       capacitance                        *
+************************************************************
++cfs     = 0               cfd     = 0               cgso    = 1.6e-010        cgdo    = 1.6e-010      
++cgsl    = 0               cgdl    = 0               ckappas = 0.6             ckappad = 0.6           
++cgbo    = 0               cgbl    = 0             
+************************************************************
+*                       temperature                        *
+************************************************************
++tbgasub = 0.000473        tbgbsub = 636             kt1     = 0               kt1l    = 0             
++ute     = -0.7            utl     = 0               ua1     = 0.001032        ud1     = 0             
++ucste   = -0.004775       at      = 0.001           ptwgt   = 0.004           tmexp   = 0             
++prt     = 0               tgidl   = -0.007          igt     = 2.5           
+************************************************************
+*                          noise                           *
+************************************************************
+**)
+.control
+pre_osdi /home/hprcse/Documents/test/bsimcmg.osdi
+.endc
+
+)"
+V {}
+S {}
+E {}
+L 4 7.5 -22.5 7.5 22.5 {}
+L 4 -20 0 2.5 0 {}
+L 4 20 -30 20 -17.5 {}
+L 4 20 17.5 20 30 {}
+L 4 2.5 -15 2.5 15 {}
+L 4 7.5 -17.5 20 -17.5 {}
+L 4 7.5 17.5 15 17.5 {}
+B 5 17.5 -32.5 22.5 -27.5 {name=D dir=inout}
+B 5 -22.5 -2.5 -17.5 2.5 {name=G dir=in}
+B 5 17.5 27.5 22.5 32.5 {name=S dir=inout}
+B 5 19.921875 -0.078125 20.078125 0.078125 {name=B dir=in}
+P 4 4 15 15 20 17.5 15 20 15 15 {fill=true}
+P 5 4 20 -2.5 15 0 20 2.5 20 -2.5 {fill=true}
+T {@name} 5 -30 0 1 0.2 0.2 {}
+T {S} 22.5 17.5 0 0 0.15 0.15 {layer=7}
+T {D} 22.5 -17.5 2 1 0.15 0.15 {layer=7}
+T {B} 20 -10 0 0 0.15 0.15 {layer=7}
+T {G} -10 -10 0 1 0.15 0.15 {layer=7}
+T {@model} 30 -8.75 2 1 0.2 0.2 {}
+T {nfin=@nfin} 31.25 13.75 0 0 0.2 0.2 { layer=13}
+T {l=@l} 31.25 1.25 0 0 0.2 0.2 { layer=13}
+
+
