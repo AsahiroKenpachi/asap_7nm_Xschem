@@ -55,3 +55,25 @@ sudo make install
 
 <p> These models are written using Verilog-A [extension .va] and are compiled using OpenVAF compiler. Upon Compilation , we will ger .osdi files from .va files . Add it to your working directory where .sp is present. The latest version of Ngspice has the support for .osdi files which may not be true fur older versions. You can get OpenVAF from https://openvaf.semimod.de/docs/getting-started/introduction/  </p>
 <p>Make sure that the executable of OpenVAF is in the path of your system so that .va files can be compiled </p>
+
+### How To create symbols For Xschem
+<p>Xschem has no predefined pdk target, as long as spice models are available and the netlist syntax for silicon devices is known a library of symbols (fets, bjts, diodes, capacitors, resistors and so on) can be created for that specific pdk. Some artwork is needed to create the symbols, like this:</p>
+
+![unnamed](https://github.com/AsahiroKenpachi/asap_7nm_Xschem/assets/137492506/908e6679-9352-4d8a-a8aa-1ab0067a03c6)
+
+Therefore based on reram.sym of SKY130 , We found out how to integrate spice to create the symbol. The only thing that the user must do is change this line in .sym file 
+
+```
+.control
+pre_osdi /home/hprcse/Documents/test/bsimcmg.osdi
+.endc
+```
+To
+
+```
+.control
+pre_osdi <TO THE ABSOLUTE PATH WHERE .osdi resides>
+.endc
+```
+
+<p>The .osdi file is given in this git repo which can be cloned in the user's workstation. If possible this file's can be added  to path and using an environment variable it can be mapped during compile time.</p>
